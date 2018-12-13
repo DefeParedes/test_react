@@ -10,6 +10,7 @@ const HeaderLayout = (props) => {
             <button onClick = {props.clickHandler }>un boton3</button>
             <div>
                 <h2>{props.texto_boton_2}</h2>
+                <p>maury aca</p>
             </div>
             <button>{props.texto_boton_2}</button>
         </div>
