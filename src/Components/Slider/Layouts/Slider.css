@@ -1,0 +1,40 @@
+:root {
+}
+
+.Slider {
+  background-color: red;
+  width: 100%;
+  height: 50vh;
+  overflow-y: hidden;
+  position: relative;
+}
+.Slider-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  z-index: 0;
+}
+.Slider-Buttons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+.Slider-Buttons button {
+  width: 4em;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.Slider-image {
+  min-width: 100%;
+  clear: left;
+  position: relative;
+}
+.Slider-image-background {
+  width: 100%;
+}

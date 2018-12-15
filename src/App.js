@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
-import Header from './pages/containers/Header';
+import React from "react";
+import { HashRouter, Route } from "react-router-dom";
+import Home from "./Pages/Home/Containers/Home";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header></Header>
-      </div>
-    );
-  }
-}
-
-export default App;
+export default () => (
+  <HashRouter>
+    <div>
+      <Route exact path="/" component={Home} />
+    </div>
+  </HashRouter>
+);
