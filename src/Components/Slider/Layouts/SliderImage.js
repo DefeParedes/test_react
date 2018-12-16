@@ -1,4 +1,5 @@
 import React from "react";
+import CSSTransitionGroup from "react-addons-css-transition-group";
 
 //  Mini Componente que Renderiza una etiqueta <source> para las imagenes responsivas.
 const Source = props => {
@@ -25,17 +26,25 @@ const SliderImage = props => {
 
   return (
     <div className="Slider-image">
-      <picture>
-        {source.map((item, index) => {
-          return <Source info={item} key={"id" + index} />;
-        })}
-        <img
-          className="Slider-image-background"
-          src={props.imagen.img}
-          draggable="false"
-          alt="Banner"
-        />
-      </picture>
+      <CSSTransitionGroup
+        transitionName={props.animacion}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
+      >
+        <picture key={props.imagen.img}>
+          {source.map((item, index) => {
+            return <Source info={item} key={"id" + index} />;
+          })}
+
+          <img
+            key={props.imagen.img}
+            className="Slider-image-background"
+            src={props.imagen.img}
+            draggable="false"
+            alt="Banner"
+          />
+        </picture>
+      </CSSTransitionGroup>
       <div className="Slider-image-content">{props.children}</div>
     </div>
   );

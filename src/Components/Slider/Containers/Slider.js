@@ -61,25 +61,64 @@ const imagenes = [
 class Slider extends Component {
   state = {
     imagenes,
-    index: 0
+    speed: 7000,
+    index: 0,
+    animacion: "sliderLeft"
   };
 
-  //    Salta a la imagen siguiente
+  // Timer para cambiar la imagen cada cierto periodo.
+  autoChangeImage = () => {
+    this.myInterval = setInterval(() => {
+      this.nextImage();
+    }, this.state.speed);
+  };
+
+  //  Salta a la imagen siguiente
   nextImage = () => {
+    //  Detener Timer.
+    clearInterval(this.myInterval);
+
+    //  Asigna la animacion
+    this.setState({ animacion: "sliderRight" });
+
+    //  Cambia la imagen
     if (this.state.index === this.state.imagenes.length - 1) {
       this.setState({ index: 0 });
     } else {
       this.setState({ index: this.state.index + 1 });
     }
+
+    //  reinicia el timer
+    this.autoChangeImage();
   };
 
-  //    Salta a la imagen anterior
+  //  Salta a la imagen anterior
   prevImage = () => {
+    //  Detener Timer.
+    clearInterval(this.myInterval);
+
+    //  Asigna la animacion
+    this.setState({ animacion: "sliderLeft" });
+
+    //  Cambia la imagen
     if (this.state.index === 0) {
       this.setState({ index: this.state.imagenes.length - 1 });
     } else {
       this.setState({ index: this.state.index - 1 });
     }
+
+    //  reinicia el timer
+    this.autoChangeImage();
+  };
+
+  selectImage = id => {
+    //  Detener Timer.
+    clearInterval(this.myInterval);
+
+    this.setState({ index: id });
+
+    //  reinicia el timer
+    this.autoChangeImage();
   };
 
   componentDidMount() {
@@ -87,11 +126,28 @@ class Slider extends Component {
     if (this.props.imagenes != null) {
       this.setState({ imagenes: this.props.imagenes });
     }
+    if (this.props.speed != null) {
+      this.setState({ speed: this.props.speed });
+    }
+    //Inicializa el Timer para pasar de imagen automaticamente cada cierto periodo de tiempo.
+    this.autoChangeImage();
+  }
+  componentWillUnmount() {
+    clearInterval(this.myInterval);
   }
   render() {
     return (
-      <SliderLayout nextButton={this.nextImage} backButton={this.prevImage}>
-        <SliderImage imagen={this.state.imagenes[this.state.index]} />
+      <SliderLayout
+        nextButton={this.nextImage}
+        backButton={this.prevImage}
+        selectImage={this.selectImage}
+        maxIndex={this.state.imagenes}
+        index={this.state.index}
+      >
+        <SliderImage
+          imagen={this.state.imagenes[this.state.index]}
+          animacion={this.state.animacion}
+        />
       </SliderLayout>
     );
   }
