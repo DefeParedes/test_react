@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SliderLayout from "../Layouts/SliderLayout";
 import SliderImage from "../Layouts/SliderImage";
 
-// Ejemplo de Archivo de Imagenes
+// Archivo de Imagenes default
 const imagenes = [
   {
     img:
@@ -55,19 +55,38 @@ const imagenes = [
   }
 ];
 
-//Componente principal
+//COMPONENTE PRINCIPAL
 //  Requiere SliderLayout y SliderImagen
 //  Muestra un Slider con botones para cambiar entre las distintas imagenes cargadas.
 class Slider extends Component {
   state = {
     imagenes,
     speed: 7000,
+    showButtons: true,
+    height: "100%",
     index: 0,
     animacion: "sliderLeft"
   };
 
+  //  Asigna los valores del estado segun los props pasados.
+  inicializarVariables = () => {
+    if (this.props.imagenes != null) {
+      this.setState({ imagenes: this.props.imagenes });
+    }
+    if (this.props.showButtons != null) {
+      this.setState({ showButtons: this.props.showButtons });
+    }
+    if (this.props.speed != null) {
+      this.setState({ speed: this.props.speed });
+    }
+    if (this.props.height != null) {
+      this.setState({ height: this.props.height });
+    }
+  };
+
   // Timer para cambiar la imagen cada cierto periodo.
   autoChangeImage = () => {
+    clearInterval(this.myInterval);
     this.myInterval = setInterval(() => {
       this.nextImage();
     }, this.state.speed);
@@ -75,70 +94,61 @@ class Slider extends Component {
 
   //  Salta a la imagen siguiente
   nextImage = () => {
-    //  Detener Timer.
-    clearInterval(this.myInterval);
-
     //  Asigna la animacion
     this.setState({ animacion: "sliderRight" });
-
     //  Cambia la imagen
     if (this.state.index === this.state.imagenes.length - 1) {
       this.setState({ index: 0 });
     } else {
       this.setState({ index: this.state.index + 1 });
     }
-
     //  reinicia el timer
     this.autoChangeImage();
   };
 
   //  Salta a la imagen anterior
   prevImage = () => {
-    //  Detener Timer.
-    clearInterval(this.myInterval);
-
     //  Asigna la animacion
     this.setState({ animacion: "sliderLeft" });
-
     //  Cambia la imagen
     if (this.state.index === 0) {
       this.setState({ index: this.state.imagenes.length - 1 });
     } else {
       this.setState({ index: this.state.index - 1 });
     }
-
     //  reinicia el timer
     this.autoChangeImage();
   };
 
   selectImage = id => {
-    //  Detener Timer.
-    clearInterval(this.myInterval);
-
+    if (id < this.state.index) {
+      this.setState({ animacion: "sliderLeft" });
+    } else {
+      this.setState({ animacion: "sliderRight" });
+    }
     this.setState({ index: id });
-
-    //  reinicia el timer
-    this.autoChangeImage();
+    this.autoChangeImage(); //  reinicia el timer
   };
 
+  //  FUNCIONES DEL TIEMPO DE VIDA DEL COMPONENTE.
+  componentWillMount() {
+    //  Inicaliza en stado de Imagenes
+    this.inicializarVariables();
+  }
   componentDidMount() {
-    // Inicaliza en stado de Imagenes
-    if (this.props.imagenes != null) {
-      this.setState({ imagenes: this.props.imagenes });
-    }
-    if (this.props.speed != null) {
-      this.setState({ speed: this.props.speed });
-    }
-    //Inicializa el Timer para pasar de imagen automaticamente cada cierto periodo de tiempo.
+    //  Inicializa el Timer para pasar de imagen automaticamente
+    //  cada cierto periodo de tiempo.
     this.autoChangeImage();
   }
   componentWillUnmount() {
+    //  detiene el timer para ahorrar memoria cuando se deja de renderizar el documento.
     clearInterval(this.myInterval);
   }
   render() {
     return (
       <SliderLayout
-        minHeight={this.props.minHeight}
+        height={this.state.height}
+        showButtons={this.state.showButtons}
         nextButton={this.nextImage}
         backButton={this.prevImage}
         selectImage={this.selectImage}
