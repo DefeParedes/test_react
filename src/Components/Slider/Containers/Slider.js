@@ -6,49 +6,49 @@ import SliderImage from "../Layouts/SliderImage";
 const imagenes = [
   {
     img:
-      "https://i-h2.pinimg.com/564x/ed/a9/20/eda9208c87a8e63817b9e0ebb961cdbd.jpg",
+      "https://cdna.artstation.com/p/assets/images/images/014/672/642/large/chun-lo-dog-patreon.jpg?1544971328",
     source: [
       {
         img:
-          "https://i-h2.pinimg.com/564x/ed/a9/20/eda9208c87a8e63817b9e0ebb961cdbd.jpg",
+          "https://cdna.artstation.com/p/assets/images/images/014/672/642/large/chun-lo-dog-patreon.jpg?1544971328",
         media: "(max-width: 450px)"
       },
       {
         img:
-          "https://i-h2.pinimg.com/564x/ed/a9/20/eda9208c87a8e63817b9e0ebb961cdbd.jpg",
+          "https://cdna.artstation.com/p/assets/images/images/014/672/642/large/chun-lo-dog-patreon.jpg?1544971328",
         media: "(max-width: 650px)"
       }
     ]
   },
   {
     img:
-      "https://i-h2.pinimg.com/564x/e2/60/60/e260606002c02ef4ad414f2a7e021447.jpg",
+      "https://cdna.artstation.com/p/assets/images/images/006/567/784/large/chun-lo-strife.jpg?1499605807",
     source: [
       {
         img:
-          "https://i-h2.pinimg.com/564x/e2/60/60/e260606002c02ef4ad414f2a7e021447.jpg",
+          "https://cdna.artstation.com/p/assets/images/images/006/567/784/large/chun-lo-strife.jpg?1499605807",
         media: "(max-width: 450px)"
       },
       {
         img:
-          "https://i-h2.pinimg.com/564x/e2/60/60/e260606002c02ef4ad414f2a7e021447.jpg",
+          "https://cdna.artstation.com/p/assets/images/images/006/567/784/large/chun-lo-strife.jpg?1499605807",
         media: "(max-width: 650px)"
       }
     ]
   },
   {
     img:
-      "https://i-h2.pinimg.com/564x/8b/db/a1/8bdba142bcd3a711a4d3c1ddb54a39ff.jpg",
+      "https://cdna.artstation.com/p/assets/images/images/004/449/910/large/chun-lo-akuma.jpg?1483881228",
 
     source: [
       {
         img:
-          "https://i-h2.pinimg.com/564x/8b/db/a1/8bdba142bcd3a711a4d3c1ddb54a39ff.jpg",
+          "https://cdna.artstation.com/p/assets/images/images/004/449/910/large/chun-lo-akuma.jpg?1483881228",
         media: "(max-width: 450px)"
       },
       {
         img:
-          "https://i-h2.pinimg.com/564x/8b/db/a1/8bdba142bcd3a711a4d3c1ddb54a39ff.jpg",
+          "https://cdna.artstation.com/p/assets/images/images/004/449/910/large/chun-lo-akuma.jpg?1483881228",
         media: "(max-width: 650px)"
       }
     ]
@@ -138,6 +138,7 @@ class Slider extends Component {
   render() {
     return (
       <SliderLayout
+        minHeight={this.props.minHeight}
         nextButton={this.nextImage}
         backButton={this.prevImage}
         selectImage={this.selectImage}

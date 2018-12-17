@@ -11,8 +11,17 @@ const SliderLayout = props => {
     }
   });
 
+  let SliderStyle = {
+    minHeight: "50vh"
+  };
+  if (props.minHeight != null) {
+    SliderStyle = {
+      minHeight: props.minHeight
+    };
+  }
+
   return (
-    <div className="Slider">
+    <div className="Slider" style={SliderStyle}>
       <div className="Slider-container">{props.children}</div>
       <div className="Slider-Buttons">
         <button className="changeImg" onClick={props.backButton}>

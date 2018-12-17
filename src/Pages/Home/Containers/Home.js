@@ -6,7 +6,9 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <Slider />
+        <Slider minHeight="50vh" />
+        <Slider minHeight="25vh" />
+        <Slider minHeight="25vh" />
       </div>
     );
   }
